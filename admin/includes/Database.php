@@ -22,12 +22,19 @@ class Database
 
     public function query($sql)
     {
-        $result = mysqli_query($this->connection, $sql);
+        return mysqli_query($this->connection, $sql);
+    }
+
+    public function escape_string($string)
+    {
+        return mysqli_real_escape_string($this->connection, $string);
+    }
+
+    private function confirm_query($result)
+    {
         if (!$result) {
             die('Query Failed');
         }
-
-        return $result;
     }
 }
 
