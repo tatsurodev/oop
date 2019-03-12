@@ -12,8 +12,14 @@
                         while ($row = mysqli_fetch_array($result_set)) {
                             echo $row['username'].'<br>';
                         }
-                        $find_user = User::find_user_by_id(1)['username'];
-                        echo $find_user;
+                        $find_user = User::find_user_by_id(1);
+                        $user = new User();
+                        $user->id = $find_user['id'];
+                        $user->username = $find_user['username'];
+                        $user->password = $find_user['password'];
+                        $user->first_name = $find_user['first_name'];
+                        $user->last_name = $find_user['last_name'];
+                        echo $user->firstid_name;
                          ?>
                         <ol class="breadcrumb">
                             <li>
