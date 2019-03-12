@@ -28,14 +28,20 @@ class User
         return $result_set;
     }
 
-    public static function instantation($find_user)
+    public static function instantation($the_record)
     {
         $the_object = new self();
-        $the_object->id = $find_user['id'];
-        $the_object->username = $find_user['username'];
-        $the_object->password = $find_user['password'];
-        $the_object->first_name = $find_user['first_name'];
-        $the_object->last_name = $find_user['last_name'];
+        // $the_object->id = $find_user['id'];
+        // $the_object->username = $find_user['username'];
+        // $the_object->password = $find_user['password'];
+        // $the_object->first_name = $find_user['first_name'];
+        // $the_object->last_name = $find_user['last_name'];
+        foreach ($the_record as $the_attribute => $value) {
+            if (is_string($the_attribute)) {
+                // echo "the_attribute:{$the_attribute}, value:{$value}<br>";
+                $the_object->{$the_attribute} = $value;
+            }
+        }
 
         return $the_object;
     }
