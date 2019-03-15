@@ -24,8 +24,13 @@ class User
     {
         global $database;
         $result_set = $database->query($sql);
+        $the_object_array = [];
 
-        return $result_set;
+        while ($row = mysqli_fetch_array($result_set)) {
+            $the_object_array[] = self::instantation($row);
+        }
+
+        return $the_object_array;
     }
 
     //レコードからプロパティを自動セットするメソッド
