@@ -40,6 +40,14 @@ class User
         }
 
         return $the_object;
+        // $the_object
+        // User::__set_state(array(
+        //    'id' => '2',
+        //     'username' => 'taro',
+        //     'password' => '123',
+        //     'first_name' => 'taro',
+        //     'last_name' => 'suzuki',
+        // ))
     }
 
     //与えた引数がこのユーザークラスのプロパティにあるかどうかを返すメソッド
@@ -47,6 +55,14 @@ class User
     {
         //このクラスのプロパティを格納
         $object_properties = get_object_vars($this);
+        //object_properties example
+        // array (
+        //     'id' => '2',
+        //     'username' => 'taro',
+        //     'password' => '123',
+        //     'first_name' => 'taro',
+        //     'last_name' => 'suzuki',
+        // )
 
         return array_key_exists($the_attribute, $object_properties);
     }
