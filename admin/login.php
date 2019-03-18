@@ -14,11 +14,12 @@ if (isset($_POST['submit'])) {
         $session->login($user_found);
         redirect('index.php');
     } else {
-        $message = 'Your username or password are incorrect.';
+        $the_message = 'Your username or password are incorrect.';
     }
 } else {
     $username = '';
     $password = '';
+    $the_message = '';
 }
 ?>
 
