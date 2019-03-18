@@ -33,6 +33,28 @@ class User
         return $the_object_array;
     }
 
+    //ログインページで使用
+    public static function verify_user($username, $password)
+    {
+        global $database;
+        $username = $database->escape_string($username);
+        $password = $database->escape_string($password);
+        $sql = "
+            SELECT
+                *
+            FROM
+                users
+            WHERE
+                username='{$username}'
+                AND password='{$password}'
+            LIMIT
+                1
+        ";
+        $the_result_array = self::find_this_query($sql);
+
+        return !empty($the_result_array) ? array_shift($the_result_array) : false;
+    }
+
     //レコードからプロパティを自動セットするメソッド
     public static function instantation($the_record)
     {
