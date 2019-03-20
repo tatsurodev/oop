@@ -21,13 +21,18 @@
                         // foreach ($users as $user) {
                         //     echo $user->username.'<br>';
                         // }
-                        $user = new User();
-                        $user->username = 'john';
-                        $user->passwoord = '123';
-                        $user->first_name = 'John';
-                        $user->last_name = 'Smith';
-                        $user->create();
+                        // createメソッド
+                        // $user = new User();
+                        // $user->username = 'john';
+                        // $user->passwoord = '123';
+                        // $user->first_name = 'John';
+                        // $user->last_name = 'Smith';
+                        // $user->create();
 
+                        //updateメソッド
+                        $user = User::find_user_by_id(3);
+                        $user->last_name = 'update';
+                        $user->update();
                          ?>
                         <ol class="breadcrumb">
                             <li>

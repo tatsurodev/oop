@@ -106,6 +106,26 @@ class User
         return false;
     }
 
+    public function update()
+    {
+        global $database;
+        $sql = "
+            UPDATE
+                users
+            SET
+                username = '{$database->escape_string($this->username)}',
+                password = '{$database->escape_string($this->password)}',
+                first_name = '{$database->escape_string($this->first_name)}',
+                last_name = '{$database->escape_string($this->last_name)}'
+            WHERE
+                id = {$database->escape_string}({$this->id});
+        ";
+
+        $database->query($sql);
+
+        return 1 === mysqli_affected_rows($database->connection) ? true : false;
+    }
+
     //与えた引数がこのユーザークラスのプロパティにあるかどうかを返すメソッド
     private function has_the_attribute($the_attribute)
     {
