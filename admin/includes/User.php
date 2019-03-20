@@ -116,14 +116,16 @@ class User
     public function update()
     {
         global $database, $i;
+        $properties = $this->properties();
+        $properties_pairs = [];
+        foreach ($properties as $key => $value) {
+            $properties_pairs[] = "{$key}='{$value}'";
+        }
         $sql = "
             UPDATE
                 {$i(self::$db_table)}
             SET
-                username = '{$database->escape_string($this->username)}',
-                password = '{$database->escape_string($this->password)}',
-                first_name = '{$database->escape_string($this->first_name)}',
-                last_name = '{$database->escape_string($this->last_name)}'
+                {$i(implode(', ', $properties_pairs))}
             WHERE
                 id = {$database->escape_string}({$this->id})
             ;

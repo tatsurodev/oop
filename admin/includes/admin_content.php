@@ -23,16 +23,18 @@
                         // }
 
                         // createメソッド
-                        $user = new User();
-                        $user->username = 'john';
-                        $user->password = '123';
-                        $user->first_name = 'John';
-                        $user->last_name = 'Smith';
-                        $user->create();
+                        // $user = new User();
+                        // $user->username = 'john';
+                        // $user->password = '123';
+                        // $user->first_name = 'John';
+                        // $user->last_name = 'Smith';
+                        // $user->create();
 
                         //updateメソッド
-                        // $user = User::find_user_by_id(3);
-                        // $user->update();
+                        $user = User::find_user_by_id(5);
+                        $user->first_name = 'Hanako';
+                        $user->last_name = 'Sasaki';
+                        $user->update();
 
                         //deleteメソッド
                         // $user = User::find_user_by_id(4);
