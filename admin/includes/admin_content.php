@@ -21,7 +21,13 @@
                         // foreach ($users as $user) {
                         //     echo $user->username.'<br>';
                         // }
-                        $test = new Test();
+                        $user = new User();
+                        $user->username = 'john';
+                        $user->passwoord = '123';
+                        $user->first_name = 'John';
+                        $user->last_name = 'Smith';
+                        $user->create();
+
                          ?>
                         <ol class="breadcrumb">
                             <li>

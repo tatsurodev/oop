@@ -77,6 +77,35 @@ class User
         // ))
     }
 
+    public function create()
+    {
+        global $database;
+        $sql = "
+            INSERT INTO
+                users (
+                    username,
+                    password,
+                    first_name,
+                    last_name
+                )
+            VALUES
+                (
+                    '{$database->escape_string($this->username)}',
+                    '{$database->escape_string($this->password)}',
+                    '{$database->escape_string($this->first_name)}',
+                    '{$database->escape_string($this->last_name)}'
+                )
+        ";
+
+        if ($database->query($sql)) {
+            $this->id = $database->the_insert_id();
+
+            return true;
+        }
+
+        return false;
+    }
+
     //与えた引数がこのユーザークラスのプロパティにあるかどうかを返すメソッド
     private function has_the_attribute($the_attribute)
     {
