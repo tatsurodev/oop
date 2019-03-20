@@ -8,6 +8,8 @@ class User
     public $first_name;
     public $last_name;
     protected static $db_table = 'users';
+    //createメソッドで使用するプロパティを配列にして格納
+    protected static $db_table_fields = ['username', 'password', 'first_name', 'last_name'];
 
     public static function find_all_users()
     {
@@ -86,20 +88,15 @@ class User
     public function create()
     {
         global $database, $i;
+        $properties = $this->properties();
         $sql = "
             INSERT INTO
                 {$i(self::$db_table)} (
-                    username,
-                    password,
-                    first_name,
-                    last_name
+                    {$i(implode(',', array_keys($properties)))}
                 )
             VALUES
                 (
-                    '{$database->escape_string($this->username)}',
-                    '{$database->escape_string($this->password)}',
-                    '{$database->escape_string($this->first_name)}',
-                    '{$database->escape_string($this->last_name)}'
+                    '{$i(implode("','", array_values($properties)))}'
                 )
             ;
         ";
@@ -150,6 +147,19 @@ class User
         $database->query($sql);
 
         return 1 === mysqli_affected_rows($database->connection) ? true : false;
+    }
+
+    //createで使用するプロパティのキーと値を$db_table_fieldsを使って取得する
+    protected function properties()
+    {
+        $properties = [];
+        foreach (self::$db_table_fields as $db_field) {
+            if (property_exists($this, $db_field)) {
+                $properties[$db_field] = $this->{$db_field};
+            }
+        }
+
+        return $properties;
     }
 
     //与えた引数がこのユーザークラスのプロパティにあるかどうかを返すメソッド
