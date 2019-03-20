@@ -7,15 +7,19 @@ class User
     public $password;
     public $first_name;
     public $last_name;
+    protected static $db_table = 'users';
 
     public static function find_all_users()
     {
-        return self::find_this_query('SELECT * FROM users');
+        $table = self::$db_table;
+
+        return self::find_this_query("SELECT * FROM {$table}");
     }
 
     public static function find_user_by_id($id)
     {
-        $the_result_array = self::find_this_query("SELECT * FROM users WHERE id={$id} LIMIT 1");
+        $table = self::$db_table;
+        $the_result_array = self::find_this_query("SELECT * FROM {$table} WHERE id={$id} LIMIT 1");
 
         return !empty($the_result_array) ? array_shift($the_result_array) : false;
     }
@@ -37,13 +41,14 @@ class User
     public static function verify_user($username, $password)
     {
         global $database;
+        $table = self::$db_table;
         $username = $database->escape_string($username);
         $password = $database->escape_string($password);
         $sql = "
             SELECT
                 *
             FROM
-                users
+                {$table}
             WHERE
                 username='{$username}'
                 AND password='{$password}'
@@ -77,12 +82,18 @@ class User
         // ))
     }
 
+    public function save()
+    {
+        return isset($this->id) ? $this->update() : $this->create();
+    }
+
     public function create()
     {
         global $database;
+        $table = self::$db_table;
         $sql = "
             INSERT INTO
-                users (
+                {$table} (
                     username,
                     password,
                     first_name,
@@ -109,9 +120,10 @@ class User
     public function update()
     {
         global $database;
+        $table = self::$db_table;
         $sql = "
             UPDATE
-                users
+                {$table}
             SET
                 username = '{$database->escape_string($this->username)}',
                 password = '{$database->escape_string($this->password)}',
@@ -130,9 +142,10 @@ class User
     public function delete()
     {
         global $database;
+        $table = self::$db_table;
         $sql = "
             DELETE FROM
-                users
+                {$table}
             WHERE
                 id = {$database->escape_string}({$this->id})
             LIMIT

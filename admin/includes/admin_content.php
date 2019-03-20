@@ -21,10 +21,11 @@
                         // foreach ($users as $user) {
                         //     echo $user->username.'<br>';
                         // }
+
                         // createメソッド
                         // $user = new User();
                         // $user->username = 'john';
-                        // $user->passwoord = '123';
+                        // $user->password = '123';
                         // $user->first_name = 'John';
                         // $user->last_name = 'Smith';
                         // $user->create();
@@ -34,8 +35,18 @@
                         // $user->update();
 
                         //deleteメソッド
-                        $user = User::find_user_by_id(4);
-                        $user->delete();
+                        // $user = User::find_user_by_id(4);
+                        // $user->delete();
+
+                        //saveメソッド
+                        // $update_user = User::find_user_by_id(5);
+                        // $update_user->last_name = 'Yamada';
+                        // $update_user->save();
+
+                        // $new_user = new User();
+                        // $new_user->username = 'tanaka';
+                        // $new_user->save();
+
                          ?>
                         <ol class="breadcrumb">
                             <li>
