@@ -118,7 +118,26 @@ class User
                 first_name = '{$database->escape_string($this->first_name)}',
                 last_name = '{$database->escape_string($this->last_name)}'
             WHERE
-                id = {$database->escape_string}({$this->id});
+                id = {$database->escape_string}({$this->id})
+            ;
+        ";
+
+        $database->query($sql);
+
+        return 1 === mysqli_affected_rows($database->connection) ? true : false;
+    }
+
+    public function delete()
+    {
+        global $database;
+        $sql = "
+            DELETE FROM
+                users
+            WHERE
+                id = {$database->escape_string}({$this->id})
+            LIMIT
+                1
+            ;
         ";
 
         $database->query($sql);

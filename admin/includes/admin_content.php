@@ -30,9 +30,12 @@
                         // $user->create();
 
                         //updateメソッド
-                        $user = User::find_user_by_id(3);
-                        $user->last_name = 'update';
-                        $user->update();
+                        // $user = User::find_user_by_id(3);
+                        // $user->update();
+
+                        //deleteメソッド
+                        $user = User::find_user_by_id(4);
+                        $user->delete();
                          ?>
                         <ol class="breadcrumb">
                             <li>
