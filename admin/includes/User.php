@@ -13,11 +13,14 @@ class User
 
     public static function find_all_users()
     {
+        global $i;
+
         return self::find_this_query("SELECT * FROM {$i(self::$db_table)}");
     }
 
     public static function find_user_by_id($id)
     {
+        global $i;
         $the_result_array = self::find_this_query("SELECT * FROM {$i(self::$db_table)} WHERE id={$id} LIMIT 1");
 
         return !empty($the_result_array) ? array_shift($the_result_array) : false;
