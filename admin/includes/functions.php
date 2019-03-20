@@ -16,3 +16,9 @@ function redirect($location)
 {
     header("Location: {$location}");
 }
+
+//恒等関数(identity function)
+//文字列中の静的プロパティ、関数などの式展開に使用
+$i = function ($param) {
+    return $param;
+};
