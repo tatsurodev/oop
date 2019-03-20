@@ -32,8 +32,8 @@
 
                         //updateメソッド
                         $user = User::find_user_by_id(5);
-                        $user->first_name = 'Hanako';
-                        $user->last_name = 'Sasaki';
+                        $user->first_name = 'Hanakoo';
+                        $user->last_name = 'Sasakii';
                         $user->update();
 
                         //deleteメソッド

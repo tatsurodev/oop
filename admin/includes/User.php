@@ -91,7 +91,7 @@ class User
     public function create()
     {
         global $database, $i;
-        $properties = $this->properties();
+        $properties = $this->clean_properties();
         $sql = "
             INSERT INTO
                 {$i(self::$db_table)} (
@@ -116,7 +116,7 @@ class User
     public function update()
     {
         global $database, $i;
-        $properties = $this->properties();
+        $properties = $this->clean_properties();
         $properties_pairs = [];
         foreach ($properties as $key => $value) {
             $properties_pairs[] = "{$key}='{$value}'";
@@ -165,6 +165,20 @@ class User
         }
 
         return $properties;
+    }
+
+    //createで使用するプロパティの値をエスケープする
+    protected function clean_properties()
+    {
+        global $database;
+
+        $clean_properties = [];
+
+        foreach ($this->properties() as $key => $value) {
+            $clean_properties[$key] = $database->escape_string($value);
+        }
+
+        return $clean_properties;
     }
 
     //与えた引数がこのユーザークラスのプロパティにあるかどうかを返すメソッド
