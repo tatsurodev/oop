@@ -6,18 +6,18 @@ class Db_object
     {
         global $i;
 
-        return static::find_this_query("SELECT * FROM {$i(static::$db_table)}");
+        return static::find_by_query("SELECT * FROM {$i(static::$db_table)}");
     }
 
     public static function find_by_id($id)
     {
         global $i;
-        $the_result_array = static::find_this_query("SELECT * FROM {$i(static::$db_table)} WHERE id={$id} LIMIT 1");
+        $the_result_array = static::find_by_query("SELECT * FROM {$i(static::$db_table)} WHERE id={$id} LIMIT 1");
 
         return !empty($the_result_array) ? array_shift($the_result_array) : false;
     }
 
-    public static function find_this_query($sql)
+    public static function find_by_query($sql)
     {
         global $database;
         $result_set = $database->query($sql);
