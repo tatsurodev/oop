@@ -17,10 +17,11 @@
                         // var_export($user);
                         // echo '</pre>';
                         // echo $user->username;
-                        // $users = User::find_all_users();
-                        // foreach ($users as $user) {
-                        //     echo $user->username.'<br>';
-                        // }
+
+                        $users = User::find_all();
+                        foreach ($users as $user) {
+                            echo $user->username;
+                        }
 
                         // createメソッド
                         // $user = new User();
@@ -31,10 +32,10 @@
                         // $user->create();
 
                         //updateメソッド
-                        $user = User::find_user_by_id(5);
-                        $user->first_name = 'Hanakoo';
-                        $user->last_name = 'Sasakii';
-                        $user->update();
+                        // $user = User::find_user_by_id(5);
+                        // $user->first_name = 'Hanakoo';
+                        // $user->last_name = 'Sasakii';
+                        // $user->update();
 
                         //deleteメソッド
                         // $user = User::find_user_by_id(4);
